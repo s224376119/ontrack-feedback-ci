@@ -11,14 +11,15 @@ public class FeedbackSummaryTest {
     public void testGetFeedbackSummaryForExistingStudent() {
         FeedbackSummary summary = FeedbackSummaryService.getFeedbackSummary("S101");
 
-        // ✅ Correct test: should match the database entry for S101
+        // ✅ Matches the actual size of feedback entries in the database
         assertEquals(3, summary.getTotalTasks());
 
-        // ✅ Check positive mentions
+        // ✅ Positive feedback keywords expected in the feedback database
         assertTrue(summary.getPositiveMentions().contains("well-structured"));
         assertTrue(summary.getPositiveMentions().contains("excellent analysis"));
+        assertTrue(summary.getPositiveMentions().contains("well-researched"));
 
-        // ✅ Check areas to improve
+        // ✅ Improvement keywords expected in the feedback database
         assertTrue(summary.getAreasToImprove().contains("poor referencing"));
     }
 
@@ -26,7 +27,6 @@ public class FeedbackSummaryTest {
     public void testGetFeedbackSummaryForUnknownStudent() {
         FeedbackSummary summary = FeedbackSummaryService.getFeedbackSummary("S999");
 
-        // ✅ Should be empty summary
         assertEquals(0, summary.getTotalTasks());
         assertEquals(0, summary.getPositiveMentions().size());
         assertEquals(0, summary.getAreasToImprove().size());
