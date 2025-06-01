@@ -1,12 +1,11 @@
 package ontrack_test;
 
-import org.junit.Test;
+
 
 import ontrack.FeedbackSummary;
 import ontrack.FeedbackSummaryService;
-
+import org.junit.Test;
 import static org.junit.Assert.*;
-import java.util.List;
 
 public class FeedbackSummaryTest {
 
@@ -14,7 +13,11 @@ public class FeedbackSummaryTest {
     public void testGetFeedbackSummaryForExistingStudent() {
         FeedbackSummary summary = FeedbackSummaryService.getFeedbackSummary("S101");
 
-        assertEquals(3, summary.getTotalTasks());
+        // ✅ These are correct values, but we'll make one fail intentionally
+        // Original (correct): assertEquals(3, summary.getTotalTasks());
+        // Force failure:
+        assertEquals(999, summary.getTotalTasks());  // ❌ Intentionally wrong
+
         assertTrue(summary.getPositiveMentions().contains("well-structured"));
         assertTrue(summary.getAreasToImprove().contains("poor referencing"));
     }
